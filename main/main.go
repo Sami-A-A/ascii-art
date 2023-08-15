@@ -39,9 +39,18 @@ import (
 // }
 
 func main() {
-	str := os.Args[1]
+	if len(os.Args) < 2 {
+		fmt.Println("ERROR: no arguments to print")
+		return
+	}
+	var args string
+	for i, arg := range os.Args {
+		if i >= 1 {
+			args += arg + " "
+		}
+	}
 	var firstLines []int
-	for _, char := range str {
+	for _, char := range args {
 		if char < 32 || char > 126 {
 			fmt.Println("ERROR: Character out of range")
 			return
@@ -50,19 +59,15 @@ func main() {
 			firstLines = append(firstLines, firstLine)
 		}
 	}
-	// Open the file in read mode.
+	// Read the file
 	file, err := os.ReadFile("standard.txt")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-
 	// Split the data into a slice of strings, one for each line.
 	lines := strings.Split(string(file), "\n")
-	// fmt.Println(lines)
-
-	// Get the lines from 11 to 19.
-	for i := 1; i < 8; i++ {
+	for i := 1; i < 9; i++ {
 		for i, line := range firstLines {
 			filteredLines := lines[line-1]
 			fmt.Print(filteredLines)
