@@ -53,6 +53,7 @@ func AsciiArt() {
 	}
 }
 
+// Algorithm to find first line of each character
 func getFirstLine(char rune) int {
 	var firstLine int
 	diff := int(char) - 32
