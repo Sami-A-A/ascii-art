@@ -1,7 +1,8 @@
 package main
 
 import (
-	"ascii"
+	ascii "ascii/pkg/printAscii"
+	// "ascii/pkg/color"
 )
 
 func main() {
