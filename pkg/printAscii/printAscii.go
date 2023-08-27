@@ -11,7 +11,15 @@ func AsciiArt() {
 	// Error handling os arguments
 	// Run only if more than 1 arg
 	if len(os.Args) < 2 {
-		fmt.Println("ERROR: no arguments to print")
+		fmt.Println("ERROR: No arguments to print")
+		return
+	} else if len(os.Args) != 2 {
+		fmt.Println("ERROR: Place all text in a single argument")
+		return
+	} else if len(os.Args[1]) < 1 {
+		return
+	} else if os.Args[1] == "\\n" {
+		fmt.Println()
 		return
 	}
 
@@ -20,8 +28,11 @@ func AsciiArt() {
 
 	// Print ascii for each phrase that was separated by a new line
 	for _, phrase := range phrases {
+		if len(phrase) == 0 {
+			fmt.Println()
+			continue
+		}
 		var firstLines []int
-
 		// Save all first lines of each character into a slice
 		for _, char := range phrase {
 			if char < 32 || char > 126 {
