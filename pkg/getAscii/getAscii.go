@@ -1,14 +1,24 @@
 package ascii
 
 import (
+	"log"
 	"os"
 	"strings"
 )
 
-func AsciiArt() string {
+// Algorithm to find first line of each character
+func getFirstLine(char rune) int {
+	var firstLine int
+	diff := int(char) - 32
+	firstLine = diff*9 + 2
+	return firstLine
+}
+
+// Function to get input as art
+func AsciiArt(arg string) string {
 	var art string
 	// Split args by each new line
-	phrases := strings.Split(os.Args[1], "\\n")
+	phrases := strings.Split(arg, "\\n")
 
 	// Print ascii for each phrase that was separated by a new line
 	for i, phrase := range phrases {
@@ -53,10 +63,11 @@ func AsciiArt() string {
 	return art
 }
 
-// Algorithm to find first line of each character
-func getFirstLine(char rune) int {
-	var firstLine int
-	diff := int(char) - 32
-	firstLine = diff*9 + 2
-	return firstLine
+// Remove this after figuring out how to import the func from "output" dir
+// Function to export art to specified file
+func Output(art string, outputFlag *string) {
+	err := os.WriteFile(*outputFlag, []byte(art), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
