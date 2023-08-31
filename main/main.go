@@ -23,5 +23,5 @@ func main() {
 
 	input := os.Args[1]
 
-	ascii.printAsciiArt(input)
+	ascii.PrintAsciiArt(input)
 }
