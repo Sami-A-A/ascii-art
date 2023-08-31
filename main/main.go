@@ -5,7 +5,6 @@ import (
 	ascii "ascii/pkg/output"
 	"fmt"
 	"os"
-	// "ascii/pkg/color"
 )
 
 func main() {
