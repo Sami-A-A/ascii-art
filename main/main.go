@@ -1,8 +1,8 @@
 package main
 
 import (
-	// ascii "ascii/pkg/printAscii"
-	ascii "ascii/pkg/output"
+	ascii "ascii/pkg/getAscii"
+	// ascii "ascii/pkg/output"
 	"fmt"
 	"os"
 )
@@ -19,7 +19,7 @@ func main() {
 	} else if len(os.Args[1]) < 1 {
 		return
 	}
-	// ascii.AsciiArt()
-	art := ascii.Output()
+	art := ascii.AsciiArt()
+	// art := ascii.Output()
 	fmt.Print(art)
 }
