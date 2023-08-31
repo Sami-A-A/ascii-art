@@ -1,43 +1,29 @@
 package ascii
 
 import (
-	"fmt"
 	"os"
 	"strings"
 )
 
-func AsciiArt() {
-
-	// Error handling os arguments
-	// Run only if more than 1 arg
-	if len(os.Args) < 2 {
-		fmt.Println("ERROR: No arguments to print")
-		return
-	} else if len(os.Args) != 2 {
-		fmt.Println("ERROR: Place all text in a single argument")
-		return
-	} else if len(os.Args[1]) < 1 {
-		return
-	} else if os.Args[1] == "\\n" {
-		fmt.Println()
-		return
-	}
-
+func Output() string {
+	var art string
 	// Split args by each new line
 	phrases := strings.Split(os.Args[1], "\\n")
 
 	// Print ascii for each phrase that was separated by a new line
-	for _, phrase := range phrases {
+	for i, phrase := range phrases {
 		if len(phrase) == 0 {
-			fmt.Println()
+			if i < len(phrases)-1 { // Stop printing extra line
+				// fmt.Println()
+				art += "\n"
+			}
 			continue
 		}
 		var firstLines []int
 		// Save all first lines of each character into a slice
 		for _, char := range phrase {
 			if char < 32 || char > 126 {
-				fmt.Println("ERROR: Character out of range")
-				return
+				return "ERROR: Character out of range"
 			} else {
 				firstLine := getFirstLine(char)
 				firstLines = append(firstLines, firstLine)
@@ -47,8 +33,8 @@ func AsciiArt() {
 		// Read the file
 		file, err := os.ReadFile("standard.txt")
 		if err != nil {
-			fmt.Println(err)
-			return
+			// fmt.Println(err)
+			return "ERROR: could not read file 'standard.txt'"
 		}
 
 		// Split the data into a slice of strings, one for each line.
@@ -56,12 +42,15 @@ func AsciiArt() {
 		for i := 1; i < 9; i++ {
 			for j, line := range firstLines {
 				filteredLines := lines[line-1]
-				fmt.Print(filteredLines)
+				// fmt.Print(filteredLines)
+				art += filteredLines
 				firstLines[j]++
 			}
-			fmt.Println()
+			// fmt.Println()
+			art += "\n"
 		}
 	}
+	return art
 }
 
 // Algorithm to find first line of each character
