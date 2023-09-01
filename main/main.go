@@ -1,8 +1,7 @@
 package main
 
 import (
-	ascii "ascii/pkg/getAscii"
-	// ascii "ascii/pkg/output"
+	ascii "ascii/pkg"
 	"flag"
 	"fmt"
 	"os"
