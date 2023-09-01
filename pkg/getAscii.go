@@ -61,12 +61,3 @@ func AsciiArt(arg string) string {
 	}
 	return art
 }
-
-// // Remove this after figuring out how to import the func from "output" dir
-// // Function to export art to specified file
-// func Output(art string, outputFlag *string) {
-// 	err := os.WriteFile(*outputFlag, []byte(art), 0644)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// }
