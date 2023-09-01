@@ -26,7 +26,7 @@ func main() {
 		return
 	}
 
-	// Convert input to art and print output to file given in output flag
+	// Convert input to art and print output to desired file
 	art := ascii.AsciiArt(flag.Args()[0])
 	ascii.PrintOutput(art, fileName)
 }
