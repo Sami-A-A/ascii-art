@@ -23,7 +23,6 @@ func AsciiArt(arg string) string {
 	for i, phrase := range phrases {
 		if len(phrase) == 0 {
 			if i < len(phrases)-1 { // Stop printing extra line
-				// fmt.Println()
 				art += "\n"
 			}
 			continue
@@ -42,7 +41,6 @@ func AsciiArt(arg string) string {
 		// Read the file
 		file, err := os.ReadFile("standard.txt")
 		if err != nil {
-			// fmt.Println(err)
 			return "ERROR: could not read file 'standard.txt'"
 		}
 
@@ -51,11 +49,9 @@ func AsciiArt(arg string) string {
 		for i := 1; i < 9; i++ {
 			for j, line := range firstLines {
 				filteredLines := lines[line-1]
-				// fmt.Print(filteredLines)
 				art += filteredLines
 				firstLines[j]++
 			}
-			// fmt.Println()
 			art += "\n"
 		}
 	}
