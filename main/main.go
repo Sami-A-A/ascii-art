@@ -9,12 +9,18 @@ import (
 )
 
 func main() {
+	// Handle error if no arguments are passed
+	if len(os.Args) < 2 {
+		fmt.Println("ERROR: Insufficient arguments")
+		return
+	}
+
 	// Create a flag named "output"
 	outputFlag := flag.String("output", "output.txt", "assign output file")
 	flag.Parse()
 
 	// Confirm flag format at input
-	if strings.Contains(os.Args[1], "output") && !strings.HasPrefix(os.Args[1], "--output=") {
+	if strings.Contains(os.Args[1], "-output") && !strings.HasPrefix(os.Args[1], "--output=") {
 		fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\nEX: go run . --output=<fileName.txt> something standard")
 		return
 	}
