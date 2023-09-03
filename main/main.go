@@ -22,6 +22,7 @@ func main() {
 	// }
 
 	input := os.Args[1]
+	font := "standard.txt"
 
-	ascii.PrintAsciiArt(input)
+	ascii.InitAsciiArt(input, font)
 }
