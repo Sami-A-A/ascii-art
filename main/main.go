@@ -1,28 +1,40 @@
 package main
 
 import (
-	"ascii/pkg/ascii"
-	// "fmt"
+	"asciiart/pkg/asciiartutil"
+	"asciiart/pkg/color"
+	"asciiart/pkg/font"
+	"asciiart/pkg/align"
+	"asciiart/pkg/output"
+	"asciiart/errors/"
 	"os"
 )
 
+type Color struct {
+	ansiCode string
+	lettersToColor string 
+}
+
+type AsciiArt struct {
+	font string
+	lines [][]string
+	alignment string
+	outputFile string
+	color Color
+}
+
 func main() {
 
-	// if len(os.Args) < 2 {
-	// 	fmt.Println("ERROR: No arguments to print")
-	// 	return
-	// } else if len(os.Args) != 2 {
-	// 	fmt.Println("ERROR: Place all text in a single argument")
-	// 	return
-	// } else if len(os.Args[1]) < 1 {
-	// 	return
-	// } else if os.Args[1] == "\\n" {
-	// 	fmt.Println()
-	// 	return
-	// }
+	err := errorhandler.CheckFormat(os.Args)
 
-	input := os.Args[1]
-	font := "standard.txt"
+	var userInput AsciiArt
+	userInput.font = font.SetFont(args)
+	userInput.lines = asciiartutil.GetAsciiLines()
+	userInput.alignment = align.SetAlignment()
+	userInput.outputFile = output.SetOutput()
+	userInput.color.ansiCode = color.SetColor()
+	userInput.color.lettersToColor = color.SetLetters()
 
-	ascii.InitAsciiArt(input, font)
+	asciiartutil.PrintAsciiArt(userInput)
+	
 }

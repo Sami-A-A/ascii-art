@@ -1,3 +1,3 @@
-module ascii
+module asciiart
 
 go 1.20
