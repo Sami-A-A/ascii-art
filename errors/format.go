@@ -1,7 +1,7 @@
 package errorhandler
 
 import (
-	"errors"
+	// "errors"
 	"strings"
 )
 
@@ -20,30 +20,30 @@ func CheckFormat(input []string) error {
 	// Usage: go run . [OPTION] [STRING] [BANNER]
 	// EX: go run . --output=<fileName.txt> something standard
 	
-	if len(input) == 0 {
-		return errors.New("No argument found")
-	} else if len(input) >= 2 {
-		// For each argument check if it's correctly ordered
-		for i := 0; i < len(input); i++ {
+	// if len(input) == 0 {
+	// 	return errors.New("No argument found")
+	// } else if len(input) >= 2 {
+	// 	// For each argument check if it's correctly ordered
+	// 	for i := 0; i < len(input); i++ {
 
-			if optionCheck {
-				checkOptionIsValid(input[i])
-			}
+	// 		if optionCheck {
+	// 			checkOptionIsValid(input[i]) 
+	// 		}
 
-			if stringCheck {
-				if colorFlagCheck {
-					colorFlagCheck = false
-					optionCheck = true
-					stringCheck = 
-				}
-			}
+	// 		if stringCheck {
+	// 			if colorFlagCheck {
+	// 				colorFlagCheck = false
+	// 				optionCheck = true
+	// 				stringCheck = 
+	// 			}
+	// 		}
 
-			if bannerCheck {
+	// 		if bannerCheck {
 
-			}
+	// 		}
 
-		}
-	}
+	// 	}
+	// }
 	return nil
 }
 
@@ -57,7 +57,7 @@ func checkOptionIsValid(arg string) bool {
 		case strings.HasPrefix(arg, "--color="):
 			colorFlagCheck = true
 		default: 
-			return errors.New("Invalid flag passed as argument")
+			return false
 		}
 	} else {
 		optionCheck = false

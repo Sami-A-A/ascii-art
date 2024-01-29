@@ -9,24 +9,12 @@ import (
 	"os"
 )
 
-type Color struct {
-	ansiCode string
-	lettersToColor string 
-}
-
-type AsciiArt struct {
-	font string
-	lines [][]string
-	alignment string
-	outputFile string
-	color Color
-}
-
 func main() {
 
+	reverse := flag.Bool("reverse", false, "determines if to be printed in reverse")
+	output := flag.String("output", "output.txt", "assign output flag")
 	align := flag.String("align", "left", "aligns text")
 	color := flag.String("color", "white", "assign color")
-	output := flag.String("output", "output.txt", "assign output flag")
 
 	flag.Parse()
 
@@ -36,14 +24,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	var userInput AsciiArt
-	
-	userInput.font = options.SetFont(args)
-	userInput.lines = asciiartutil.GetAsciiLines()
-	userInput.alignment = options.SetAlignment()
-	userInput.outputFile = options.SetOutput()
-	userInput.color.ansiCode = options.SetColor()
-	userInput.color.lettersToColor = options.SetLetters()
+	userInput := new(asciiartutil.AsciiArt)
+
+	userInput.Reverse = *reverse
+	userInput.OutputFile = *output
+	userInput.Alignment = *align
+	userInput.Color.AnsiCode = *color
+	userInput.Color.LettersToColor = options.SetLetters()
+	userInput.Font = options.SetFont()
 
 	asciiartutil.InitAsciiArt(userInput)
 	
