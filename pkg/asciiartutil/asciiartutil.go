@@ -9,7 +9,7 @@ import (
 // Initializes AsciiArt by passing the string argument from main.go
 func InitAsciiArt(input, font string) {
 
-	// Splits the input string into a slice called lines git 
+	// Splits the input string into a slice called lines 
 	lines := strings.Split(input, "\\n")
 
 	// Every line is followed by a single new line
