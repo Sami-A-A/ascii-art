@@ -6,22 +6,9 @@ import (
 	"strings"
 )
 
-type Color struct {
-	AnsiCode string
-	LettersToColor string 
-}
-
-type AsciiArt struct {
-	Reverse bool
-	OutputFile string
-	Alignment string
-	Color Color
-	Lines [][]string
-	Font string
-}
 
 // Initializes AsciiArt by passing the string argument from main.go
-func InitAsciiArt(input *AsciiArt) {
+func InitAsciiArt(input AsciiArt) {
 
 	// Splits the input string into a slice called lines 
 	lines := strings.Split(input, "\\n")

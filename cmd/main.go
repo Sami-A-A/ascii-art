@@ -3,7 +3,6 @@ package main
 import (
 	"asciiart/errors"
 	"asciiart/pkg/asciiartutil"
-	"asciiart/pkg/options"
 	"flag"
 	"fmt"
 	"os"
@@ -18,20 +17,24 @@ func main() {
 
 	flag.Parse()
 
-	err := errorhandler.CheckFormat(os.Args[1:])
+	letters, text, banner, err := errorhandler.CheckFormat(os.Args[1:])
 	if err != nil {
 		fmt.Println("Error:", err)
-		os.Exit(1)
+		return
 	}
 
-	userInput := new(asciiartutil.AsciiArt)
+	userInput := asciiartutil.AsciiArt{
+		Text: text,
+		Reverse: *reverse,
+		OutputFile: *output,
+		Alignment: *align,
+		Color: asciiartutil.Color {
+			AnsiCode: *color,
+			LettersToColor: letters,
+		},
+		Font: banner,
+	}
 
-	userInput.Reverse = *reverse
-	userInput.OutputFile = *output
-	userInput.Alignment = *align
-	userInput.Color.AnsiCode = *color
-	userInput.Color.LettersToColor = options.SetLetters()
-	userInput.Font = options.SetFont()
 
 	asciiartutil.InitAsciiArt(userInput)
 	
