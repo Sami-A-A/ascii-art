@@ -12,6 +12,7 @@ type Color struct {
 }
 
 type AsciiArt struct {
+	
 	Reverse bool
 	OutputFile string
 	Alignment string

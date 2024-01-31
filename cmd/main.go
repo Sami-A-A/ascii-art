@@ -11,6 +11,8 @@ import (
 
 func main() {
 
+	args := os.Args[1:]
+
 	reverse := flag.Bool("reverse", false, "determines if to be printed in reverse")
 	output := flag.String("output", "output.txt", "assign output flag")
 	align := flag.String("align", "left", "aligns text")
@@ -18,7 +20,7 @@ func main() {
 
 	flag.Parse()
 
-	err := errorhandler.CheckFormat(os.Args[1:])
+	err := errorhandler.CheckFormat(args)
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(1)
@@ -30,8 +32,8 @@ func main() {
 	userInput.OutputFile = *output
 	userInput.Alignment = *align
 	userInput.Color.AnsiCode = *color
-	userInput.Color.LettersToColor = options.SetLetters()
-	userInput.Font = options.SetFont()
+	userInput.Color.LettersToColor = options.SetLetters(args)
+	userInput.Font = options.SetFont(args)
 
 	asciiartutil.InitAsciiArt(userInput)
 	
