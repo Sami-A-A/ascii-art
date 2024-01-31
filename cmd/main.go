@@ -1,7 +1,6 @@
 package main
 
 import (
-	"asciiart/errors"
 	"asciiart/pkg/asciiartutil"
 	"flag"
 	"fmt"
@@ -17,7 +16,7 @@ func main() {
 
 	flag.Parse()
 
-	letters, text, banner, err := errorhandler.CheckFormat(os.Args[1:])
+	letters, text, banner, err := asciiartutil.CheckFormat(os.Args[1:])
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
@@ -35,7 +34,7 @@ func main() {
 		Font: banner,
 	}
 
-
-	asciiartutil.InitAsciiArt(userInput)
+	fmt.Println(userInput)
+	// asciiartutil.InitAsciiArt(userInput)
 	
 }
