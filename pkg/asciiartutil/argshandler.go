@@ -1,5 +1,11 @@
 package asciiartutil
 
+import (
+	"asciiart/errors"
+	"fmt"
+	"strings"
+)
+
 type Color struct {
 	AnsiCode string
 	LettersToColor string 
@@ -18,8 +24,9 @@ type AsciiArt struct {
 func CheckFormat(args []string) (string, string, string, error) {
 
 	// Check Stages
-	var optionCheck = true
-	var bannerCheck = false
+	optionCheck := true
+	bannerCheck := false
+	colorCheck := false
 
 	// Initializing output variables
 	var lettersToColor string
@@ -27,9 +34,35 @@ func CheckFormat(args []string) (string, string, string, error) {
 	var banner string
 	var err error
 
+	
 	// LOOP THROUGH ALL THE ARGS
 	for _, arg := range args {
 		// CHECK IF VALID FLAG
+		if optionCheck && !colorCheck {
+			if strings.HasPrefix(arg, "--"){
+
+				err := errorhandler.CheckIsValidFlag(arg)
+				if err != nil {
+ 
+				}
+
+				if strings.HasPrefix(arg, "--color="){
+					colorCheck = true
+					continue
+				}
+
+				textToAscii = arg
+				optionCheck = false
+				bannerCheck = true
+
+			}		
+		} else if colorCheck {
+			if errorhandler.CheckIsValidFlag(arg) == nil{
+				colorCheck = false
+				continue
+			}
+		}
+
 			// IF YES    -->    ( MEANS WE'RE STILL LOOKING FOR FLAGS )
 				// CHECK IF COLOR FLAG
 					// IF YES    -->    ( MEANS WE NEED TO CHECK THE FOLLOWING ARG )
