@@ -25,6 +25,7 @@ func CheckFormat(args []string) (string, string, string, error) {
 
 	// Check Stages
 	optionCheck := true
+	textCheck := false
 	bannerCheck := false
 	colorCheck := false
 
@@ -34,32 +35,37 @@ func CheckFormat(args []string) (string, string, string, error) {
 	var banner string
 	var err error
 
-	
 	// LOOP THROUGH ALL THE ARGS
 	for _, arg := range args {
 		// CHECK IF VALID FLAG
+
+		if colorCheck {
+			if !errorhandler.CheckIsValidFlag(arg) {
+				lettersToColor = arg
+				textToAscii = arg
+			}
+			colorCheck = false
+		}
+
 		if optionCheck && !colorCheck {
-			if strings.HasPrefix(arg, "--"){
-
-				err := errorhandler.CheckIsValidFlag(arg)
-				if err != nil {
- 
-				}
-
+			if errorhandler.CheckIsValidFlag(arg){
 				if strings.HasPrefix(arg, "--color="){
 					colorCheck = true
 					continue
 				}
-
-				textToAscii = arg
+			} else {
 				optionCheck = false
-				bannerCheck = true
+				textCheck = true
+			}
+		}
 
-			}		
-		} else if colorCheck {
-			if errorhandler.CheckIsValidFlag(arg) == nil{
-				colorCheck = false
-				continue
+		if textCheck {
+			if errorhandler.CheckIsValidFlag()
+		}
+
+		if bannerCheck {
+			errorhandler.CheckIsValidBanner(arg) {
+
 			}
 		}
 

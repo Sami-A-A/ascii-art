@@ -1,8 +1,6 @@
 package errorhandler
 
 import (
-	"errors"
-	"fmt"
 	"strings"
 )
 
@@ -27,23 +25,27 @@ import (
 // }
 
 
-func CheckIsValidFlag(arg string) error {
+func CheckIsValidFlag(arg string) bool {
 
 	parsedFlags := []string{"align", "color", "output", "reverse"}
-	var err error
-
-	if !strings.HasPrefix(arg, "--") {
-		return err
-	}
 
 	for _, parsedFlag := range parsedFlags {
 		if strings.HasPrefix(arg, "--" + parsedFlag + "=") {
-			err = nil
-			break
-		} else {
-			fmt.Errorf("Error: Invalid flag")
+			return true
 		}
 	}
 
-	return err
+	return false
+}
+
+func CheckIsValidBanner(arg string) bool {
+
+	banners := []string{"standard", "tinkertoy", "shadow"}
+
+	for _, banner := range banners {
+		if arg == banner {
+			return true
+		}
+	}
+	return false
 }

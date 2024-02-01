@@ -18,7 +18,7 @@ func main() {
 
 	flag.Parse()
 
-	letters, text, banner, err := asciiartutil.CheckFormat(os.Args[1:])
+	letters, text, banner, err := asciiartutil.CheckFormat(args)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
