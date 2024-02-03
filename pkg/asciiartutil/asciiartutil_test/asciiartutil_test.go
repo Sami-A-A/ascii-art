@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func testCheckFormat(t *testing.T) {
+func TestCheckFormat(t *testing.T) {
 
 	sampleInput := []string{
 		"--output=output.txt",
@@ -15,19 +15,20 @@ func testCheckFormat(t *testing.T) {
 		"abc",
 		"--reverse=true",
 		"This is a test",
-		"standard"}
+		"standard",
+	}
 
 	resultA, resultB, resultC, err := asciiartutil.CheckFormat(sampleInput)
 	if err != nil {
 		fmt.Println(err)
-		fmt.Println("Failed")
 		return
 	}
 
-	expectedA, expectedB, expectedC := "abc", "This is a test", "standard"
+	expectedA, expectedB, expectedC, err := "abc", "This is a test", "standard", nil
 
 	if resultA != expectedA {
 		t.Errorf("Test A Failed")
+		
 	} else {
 		fmt.Println("Test A Passed")
 	}
