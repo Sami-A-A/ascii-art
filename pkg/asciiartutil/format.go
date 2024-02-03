@@ -1,7 +1,6 @@
 package asciiartutil
 
 import (
-	"asciiart/errors"
 	"fmt"
 	"strings"
 )
@@ -25,7 +24,6 @@ func CheckFormat(args []string) (string, string, string, error) {
 
 	// Check Stages
 	optionCheck := true
-	textCheck := false
 	bannerCheck := false
 	colorCheck := false
 
@@ -36,36 +34,41 @@ func CheckFormat(args []string) (string, string, string, error) {
 	var err error
 
 	// LOOP THROUGH ALL THE ARGS
-	for _, arg := range args {
-		// CHECK IF VALID FLAG
+	for i, arg := range args {
 
-		if colorCheck {
-			if !errorhandler.CheckIsValidFlag(arg) {
-				lettersToColor = arg
-				textToAscii = arg
+		if CheckIsValidFlag(arg){
+			
+			if colorCheck {
+				colorCheck = false
 			}
-			colorCheck = false
-		}
+			if strings.HasPrefix(arg, "--color=") && !colorCheck {
+				colorCheck = true
+			}
+			if !optionCheck || len(args[i:]) == 1 {
+				err = fmt.Errorf("error: formatting error and i = %d", len(args[i:]))
+				break
+			}
 
-		if optionCheck && !colorCheck {
-			if errorhandler.CheckIsValidFlag(arg){
-				if strings.HasPrefix(arg, "--color="){
-					colorCheck = true
-					continue
-				}
+		} else if optionCheck {
+
+			textToAscii = arg
+			if colorCheck {
+				lettersToColor = arg
+				colorCheck = false
 			} else {
 				optionCheck = false
-				textCheck = true
+				bannerCheck = true
 			}
-		}
+			
+		} else if bannerCheck {
 
-		if textCheck {
-			if errorhandler.CheckIsValidFlag()
-		}
-
-		if bannerCheck {
-			errorhandler.CheckIsValidBanner(arg) {
-
+			if len(args[i:]) > 1 {
+				err = fmt.Errorf("error: too many arguments")
+			}
+			if CheckIsValidBanner(arg) {
+				banner = arg
+			} else {
+				err = fmt.Errorf("error: invalid banner")
 			}
 		}
 
@@ -115,4 +118,29 @@ func CheckFormat(args []string) (string, string, string, error) {
 	// EX: go run . --output=<fileName.txt> something standard
 
 	return lettersToColor, textToAscii, banner, err
+}
+
+func CheckIsValidFlag(arg string) bool {
+
+	parsedFlags := []string{"align", "color", "output", "reverse"}
+
+	for _, parsedFlag := range parsedFlags {
+		if strings.HasPrefix(arg, "--" + parsedFlag + "=") {
+			return true
+		}
+	}
+
+	return false
+}
+
+func CheckIsValidBanner(arg string) bool {
+
+	banners := []string{"standard", "tinkertoy", "shadow"}
+
+	for _, banner := range banners {
+		if arg == banner {
+			return true
+		}
+	}
+	return false
 }

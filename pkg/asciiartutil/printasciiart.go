@@ -23,7 +23,7 @@ func InitAsciiArt(input AsciiArt) {
 	// 		PrintAsciiArt(line, font)
 	// 	}
 	// }
-	return
+	// return
 }
 
 // func PrintAsciiArt(line, font string){
